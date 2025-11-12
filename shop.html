@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Shop - Products</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body {
+  font-family:'Poppins',sans-serif;
+  background:#fff;
+  margin-top:70px;
+}
+
+/* Navbar */
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e91e63 !important;
+}
+.nav-link {color:#555 !important;transition: color 0.3s;}
+.nav-link:hover {color:#e91e63 !important;}
+.navbar-toggler {border: none !important;padding: 0 !important;box-shadow: none !important;}
+.navbar-toggler:focus {box-shadow: none !important;}
+.toggler-line {display:block;width:25px;height:3px;margin:5px 0;background-color:#e91e63;transition: all 0.3s ease-in-out;}
+.navbar-toggler:not(.collapsed) .line-1 {transform: translateY(8px) rotate(45deg);}
+.navbar-toggler:not(.collapsed) .line-2 {opacity: 0;}
+.navbar-toggler:not(.collapsed) .line-3 {transform: translateY(-8px) rotate(-45deg);}
+
+/* Mobile adjustment */
+@media (max-width: 768px){
+  body { margin-top: 85px !important; }
+}
+
+/* Sidebar */
+.sidebar {
+  background:#fff;
+  border-right:1px solid #ddd;
+  padding:20px;
+  height:100%;
+  transition:left .4s ease,opacity .4s ease;
+}
+
+.sidebar a {color:#333;text-decoration:none;}
+.sidebar a:hover {color:#e6a8a0;}
+
+@media(max-width:768px){
+  .sidebar {
+    position:fixed;
+    top:70px; /* below navbar */
+    left:-100%;
+    width:80%;
+    height:calc(100% - 70px);
+    z-index:1050;
+    overflow-y:auto;
+    box-shadow:2px 0 10px rgba(0,0,0,.1);
+    background: linear-gradient(180deg, #fff 0%, #fce4ec 100%);
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+  }
+  .sidebar.active {left:0;opacity:1;}
+  .sidebar-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
+  .close-btn {background:none;border:none;color:#e91e63;font-size:22px;transition:transform .3s;}
+  .close-btn:hover {transform:rotate(90deg);}
+}
+
+/* Product Cards */
+.product-card {
+  border:none;border-radius:8px;background:#fff;
+  transition:transform .3s,box-shadow .3s;
+  position:relative;
+}
+.product-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+.img-wrapper {position:relative;overflow:hidden;border-radius:8px;}
+.product-img {width:100%;height:233px;object-fit:cover;display:block;}
+
+/* Hover Icons */
+.hover-icons {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.img-wrapper:hover .hover-icons {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.hover-icons i {
+  border-radius: 50%;
+  background: transparent;
+  padding: 6px;
+  font-size: 16px;
+  color: #e91e63;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+.hover-icons i:hover {transform: scale(1.2); color: #ff4081;}
+
+/* Toolbar */
+.toolbar {display:flex;align-items:center;justify-content:space-between;gap:10px;}
+#searchBar {
+  border:2px solid #e6a8a0;border-radius:25px;padding:6px 15px;width:100%;transition:all .3s;
+}
+#searchBar:focus {
+  border-color:#e6a8a0;
+  box-shadow:0 0 6px rgba(230,168,160,0.7);
+}
+.filter-toggle {
+  background:#e6a8a0;color:#fff;border:none;border-radius:50%;
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  animation:bounce 2s infinite;transition:transform .3s;
+}
+.filter-toggle:hover {transform:scale(1.1);}
+@keyframes bounce {0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}60%{transform:translateY(-3px);}}
+
+/* Modal */
+.modal-content {border:none;border-radius:10px;overflow:hidden;animation:fadeIn .4s ease;}
+@keyframes fadeIn {from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
+.modal-header {border:none;position:relative;}
+.modal-body img {width:100%;height:auto;border-radius:10px;object-fit:cover;}
+.size-btn {border:1px solid #ccc;padding:3px 10px;margin-right:5px;border-radius:5px;cursor:pointer;}
+.size-btn.active {border:2px solid #e6a8a0;color:#e6a8a0;font-weight:bold;}
+.qty-box {display:flex;align-items:center;margin-bottom:10px;}
+.qty-box button {border:1px solid #ccc;background:#fff;width:30px;height:30px;}
+.qty-box input {width:50px;text-align:center;border:1px solid #ccc;height:30px;}
+.btn-cart {background:#e91e63;color:#fff;border:none;padding:10px 25px;margin-top:15px;}
+.btn-cart:hover {background:#ff4081;color:#fff;}
+
+/* Responsive modal */
+@media(min-width:768px){
+  .modal-body {display:flex;align-items:center;justify-content:center;gap:20px;}
+  .modal-body img {max-width:400px;}
+}
+@media(max-width:767px){
+  .modal-body {display:block;text-align:center;}
+  .modal-body img {width:100%;max-width:300px;margin-bottom:15px;}
+}
+
+/* Color circle */
+.color-circle {width:20px;height:20px;display:inline-block;border-radius:50%;border:1px solid #ccc;margin-right:8px;cursor:pointer;}
+.color-circle.active {border:2px solid #000;}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Ank. Flowers</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="toggler-line line-1"></span>
+      <span class="toggler-line line-2"></span>
+      <span class="toggler-line line-3"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="#cart">Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid my-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <aside class="col-md-3 sidebar" id="sidebar">
+      <div class="sidebar-header d-md-none">
+        <h5 class="fw-bold">Filters</h5>
+        <button class="close-btn" id="closeSidebar"><i class="bi bi-x-lg"></i></button>
+      </div>
+
+      <h5 class="fw-bold mb-3">Category</h5>
+      <ul class="list-unstyled">
+        <li><a href="#">Bridal Bouquets</a></li>
+        <li><a href="#">Baby Shower</a></li>
+        <li><a href="#">Birthday Bouquet</a></li>
+      </ul><hr>
+
+      <h5 class="fw-bold mb-3">Shop By Color</h5>
+      <div class="color-filters mb-4">
+        <span class="color-circle" data-color="white" style="background:#fff"></span>
+        <span class="color-circle" data-color="red" style="background:#ff0000"></span>
+        <span class="color-circle" data-color="blue" style="background:#77b5fe"></span>
+        <span class="color-circle" data-color="pink" style="background:#ff66b2"></span>
+        <span class="color-circle" data-color="green" style="background:#00cc66"></span>
+      </div><hr>
+
+      <h5 class="fw-bold mb-3">Shop By Price</h5>
+      <form id="priceFilter">
+        <div><input type="radio" name="price" value="100-200"> $100 - $200</div>
+        <div><input type="radio" name="price" value="200-300"> $200 - $300</div>
+        <div><input type="radio" name="price" value="300-400"> $300 - $400</div>
+        <div><input type="radio" name="price" value="400-500"> $400 - $500</div>
+        <div><input type="radio" name="price" value="500-700"> $500 - $700</div>
+        <div><input type="radio" name="price" value="all" checked> All</div>
+      </form><hr>
+
+      <h5 class="fw-bold mb-3">Shop By Brand</h5>
+      <ul class="list-unstyled" id="brandFilter">
+        <li><input type="checkbox" value="Bloom"> Bloom</li>
+        <li><input type="checkbox" value="Greenhouse"> Greenhouse</li>
+        <li><input type="checkbox" value="Rainbow"> Rainbow</li>
+        <li><input type="checkbox" value="Florist"> Florist</li>
+        <li><input type="checkbox" value="Blossom"> Blossom</li>
+      </ul>
+    </aside>
+
+    <!-- Main -->
+    <main class="col-md-9 px-4">
+      <div class="toolbar mb-4">
+        <input type="text" id="searchBar" placeholder="Search flowers...">
+        <button class="filter-toggle" id="openSidebar"><i class="bi bi-funnel-fill"></i></button>
+      </div>
+
+      <div id="productGrid" class="row g-4"></div>
+    </main>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImg" src="" alt="flower">
+        <div class="ms-md-3 mt-3 mt-md-0 text-center text-md-start">
+          <h4 class="fw-bold" style="color:#e6a8a0" id="modalName"></h4>
+          <p id="modalDesc" class="text-muted">Beautiful flower arrangement for any occasion.</p>
+          <p><strong>Price:</strong> <span style="color:#e6a8a0" id="modalPrice"></span></p>
+          <p><strong>Availability:</strong> <span style="color:orange;">Many In Stock</span></p>
+          <p><strong>Size:</strong> 
+            <span class="size-btn">M</span>
+            <span class="size-btn active">L</span>
+            <span class="size-btn">XL</span>
+          </p>
+          <p><strong>Quantity:</strong></p>
+          <div class="qty-box mb-2">
+            <button id="minusBtn">-</button>
+            <input type="text" id="qtyInput" value="1">
+            <button id="plusBtn">+</button>
+          </div>
+          <p><strong>Subtotal:</strong> Rs. <span id="subtotal"></span></p>
+          <button class="btn-cart w-100 w-md-auto">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const products=[
+  {id:1,name:"Artificial Flower Bouquet",price:420,color:"white",brand:"Bloom",img:"new images/flo1.svg"},
+  {id:2,name:"Birthday Bouquet",price:410,color:"red",brand:"Rainbow",img:"new images/flo2.svg"},
+  {id:3,name:"Blue Bouquet",price:200,color:"blue",brand:"Blossom",img:"new images/flo4.svg"},
+  {id:4,name:"Floral Bouquet",price:410,color:"pink",brand:"Florist",img:"new images/flo3.svg"},
+  {id:5,name:"Flower Basket",price:450,color:"green",brand:"Greenhouse",img:"new images/flo4.svg"},
+  {id:6,name:"Birthday Bouquet",price:410,color:"red",brand:"Rainbow",img:"new images/flo2.svg"},
+  {id:7,name:"Floral Bouquet",price:410,color:"pink",brand:"Florist",img:"new images/flo3.svg"},
+  {id:8,name:"Flower Basket",price:450,color:"green",brand:"Bloom",img:"new images/flo4.svg"}
+];
+
+const grid=document.getElementById("productGrid");
+
+function render(filtered=products){
+  grid.innerHTML="";
+  if(filtered.length===0){grid.innerHTML='<p class="text-center text-muted">No products found</p>';return;}
+  filtered.forEach(p=>{
+    grid.innerHTML+=`
+    <div class="col-6 col-md-3">
+      <div class="card product-card text-center">
+        <div class="img-wrapper">
+          <img src="${p.img}" class="product-img">
+          <div class="hover-icons">
+            <i class="bi bi-cart-plus"></i>
+            <i class="bi bi-share"></i>
+            <i class="bi bi-eye" onclick="openModal('${p.img}','${p.name}',${p.price})"></i>
+          </div>
+        </div>
+        <div class="card-body">
+          <h6>${p.name}</h6>
+          <p>Rs. ${p.price}.00</p>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+render();
+
+/* === Filters === */
+const searchBar=document.getElementById("searchBar");
+const colorCircles=document.querySelectorAll(".color-circle");
+const priceFilter=document.getElementById("priceFilter");
+const brandFilter=document.getElementById("brandFilter");
+
+let activeColor=null;
+let activePrice="all";
+
+function applyFilters(){
+  const query=searchBar.value.toLowerCase();
+  const selectedBrands=[...brandFilter.querySelectorAll("input:checked")].map(c=>c.value);
+  let filtered=products.filter(p=>{
+    let matchSearch=p.name.toLowerCase().includes(query);
+    let matchColor=!activeColor || p.color===activeColor;
+    let matchPrice=true;
+    if(activePrice!=="all"){
+      let [min,max]=activePrice.split("-").map(Number);
+      matchPrice=p.price>=min && p.price<=max;
+    }
+    let matchBrand=selectedBrands.length===0 || selectedBrands.includes(p.brand);
+    return matchSearch && matchColor && matchPrice && matchBrand;
+  });
+  render(filtered);
+}
+
+searchBar.addEventListener("input",applyFilters);
+
+colorCircles.forEach(c=>{
+  c.addEventListener("click",()=>{
+    colorCircles.forEach(cc=>cc.classList.remove("active"));
+    if(activeColor===c.dataset.color){activeColor=null;}else{activeColor=c.dataset.color;c.classList.add("active");}
+    applyFilters();
+  });
+});
+
+priceFilter.addEventListener("change",(e)=>{
+  activePrice=e.target.value;
+  applyFilters();
+});
+
+brandFilter.addEventListener("change",applyFilters);
+
+/* === Modal === */
+const modal=new bootstrap.Modal(document.getElementById("viewModal"));
+function openModal(img,name,price){
+  document.getElementById("modalImg").src=img;
+  document.getElementById("modalName").innerText=name;
+  document.getElementById("modalPrice").innerText="Rs. "+price+".00";
+  document.getElementById("subtotal").innerText=price+".00";
+  document.getElementById("qtyInput").value=1;
+  modal.show();
+}
+
+const qtyInput=document.getElementById("qtyInput");
+const subtotal=document.getElementById("subtotal");
+const modalPrice=document.getElementById("modalPrice");
+
+document.getElementById("minusBtn").onclick=()=>{
+  let q=parseInt(qtyInput.value);
+  if(q>1) q--;
+  qtyInput.value=q;
+  subtotal.innerText=(q*parseInt(modalPrice.innerText.replace("Rs.",""))).toFixed(2);
+};
+document.getElementById("plusBtn").onclick=()=>{
+  let q=parseInt(qtyInput.value);
+  q++;
+  qtyInput.value=q;
+  subtotal.innerText=(q*parseInt(modalPrice.innerText.replace("Rs.",""))).toFixed(2);
+};
+
+/* === Sidebar Toggle (mobile) === */
+const sidebar=document.getElementById("sidebar");
+document.getElementById("openSidebar").onclick=()=>sidebar.classList.add("active");
+document.getElementById("closeSidebar").onclick=()=>sidebar.classList.remove("active");
+</script>
+</body>
+</html>
