@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart - Flower Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(120deg, #fff5fa, #f9f1ff);
+      font-family: "Poppins", sans-serif;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 35px;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cart-title {
+      color: #6a1b9a;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 25px;
+      letter-spacing: 0.5px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeItem 0.6s ease forwards;
+    }
+
+    .cart-item:nth-child(n) {
+      animation-delay: calc(0.1s * var(--i));
+    }
+
+    @keyframes fadeItem {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+
+    .cart-item img:hover {
+      transform: scale(1.08);
+    }
+
+    .cart-item-info {
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .cart-item-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .cart-item-details {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .cart-item-price {
+      font-weight: 700;
+      color: #6a1b9a;
+      font-size: 14px;
+    }
+
+    .qty-btn {
+      background-color: #f5f0ff;
+      border: 1px solid #d6c1f7;
+      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      line-height: 26px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      color: #6a1b9a;
+    }
+
+    .qty-btn:hover {
+      background-color: #6a1b9a;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .remove-btn {
+      color: #d63384;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover {
+      transform: rotate(10deg) scale(1.2);
+    }
+
+    .cart-total {
+      text-align: right;
+      margin-top: 25px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .checkout-btn {
+      background: linear-gradient(135deg, #6a1b9a, #9b4de1);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 30px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(155, 77, 225, 0.3);
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(155, 77, 225, 0.4);
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #777;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .empty-cart i {
+      font-size: 65px;
+      color: #d6c1f7;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: 1.5px solid #6a1b9a;
+      color: #6a1b9a;
+      border-radius: 25px;
+      padding: 8px 22px;
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .back-btn:hover {
+      background-color: #6a1b9a;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .cart-container {
+        padding: 20px;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .cart-item img {
+        width: 100%;
+        max-width: 120px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+      .cart-item-info {
+        margin: 0;
+      }
+      .cart-total {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .checkout-btn,
+      .back-btn {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container cart-container">
+    <h2 class="cart-title">🛍️ Your Flower Cart</h2>
+    <div id="cartItems"></div>
+    <div class="text-center mt-4">
+      <a href="shop.html" class="btn back-btn me-2"><i class="bi bi-arrow-left"></i> Continue Shopping</a>
+      <button id="checkoutBtn" class="btn checkout-btn">Proceed to Payment</button>
+    </div>
+  </div>
+
+  <script>
+    const cartContainer = document.getElementById('cartItems');
+    let cart = JSON.parse(localStorage.getItem('flowerCart')) || [];
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `
+          <div class="empty-cart">
+            <i class="bi bi-cart-x"></i>
+            <h5 class="mt-3">Your cart is empty</h5>
+          </div>`;
+        document.getElementById('checkoutBtn').style.display = 'none';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.style.setProperty('--i', index + 1);
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.title}">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-details">Color: ${item.color}</div>
+            <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+            <div class="d-flex align-items-center mt-2">
+              <div class="qty-btn" onclick="changeQty(${index}, -1)">-</div>
+              <input type="number" min="1" value="${item.qty}" id="qty${index}" class="form-control mx-2 text-center" style="width:55px;">
+              <div class="qty-btn" onclick="changeQty(${index}, 1)">+</div>
+            </div>
+          </div>
+          <div class="ms-auto text-end mt-3 mt-md-0">
+            <div class="fw-bold text-dark">$${itemTotal.toFixed(2)}</div>
+            <i class="bi bi-trash remove-btn mt-2" onclick="removeItem(${index})"></i>
+          </div>
+        `;
+        cartContainer.appendChild(div);
+      });
+
+      const totalDiv = document.createElement('div');
+      totalDiv.className = 'cart-total';
+      totalDiv.innerHTML = `Total Amount: <span class="text-success">$${total.toFixed(2)}</span>`;
+      cartContainer.appendChild(totalDiv);
+    }
+
+    function changeQty(index, change) {
+      const newQty = cart[index].qty + change;
+      if (newQty < 1) return;
+      cart[index].qty = newQty;
+      localStorage.setItem('flowerCart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('flowerCart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      alert('Redirecting to payment...');
+      window.location.href = 'payment.html';
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

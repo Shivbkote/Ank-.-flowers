@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flower Shop - Hero Section</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+       overflow-x: hidden;
+  overflow-y: auto;
+    }
+
+    /* /navbar */
+      /* Navbar Styles */
+        .navbar-brand {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e91e63 !important;
+            /* Rose Pink color for logo */
+
+        }
+
+        .nav-link {
+            color: #555 !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e91e63 !important;
+        }
+
+        /* Custom Mobile Toggler & Animation */
+        .navbar-toggler {
+            border: none !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none !important;
+        }
+
+        .toggler-line {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: #e91e63;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar-toggler:not(.collapsed) .line-1 {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .navbar-toggler:not(.collapsed) .line-2 {
+            opacity: 0;
+        }
+
+        .navbar-toggler:not(.collapsed) .line-3 {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+    /* end navbar */
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, rgba(15, 15, 15, 0.205), rgba(0, 0, 0, 0.219)),
+        url('./todaynew/shopbg.svg') center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 5%;
+      position: relative;
+      transition: background-image 0.5s ease;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero h1 span {
+      color: #e63946;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #f8f8f8;
+      margin: 1rem 0 2rem;
+      font-weight: 400;
+    }
+
+    /* Hide subtitle on mobile */
+    @media (max-width: 576px) {
+      .hero p {
+        display: none;
+      }
+    }
+
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      height: 44px;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input {
+      border: none;
+      padding: 0.6rem 1.2rem;
+      flex: 1;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-bar button {
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 0 50px 50px 0;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background: #c82333;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 40px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 15px 25px;
+      width: 90%;
+      max-width: 900px;
+      margin: -35px auto 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .stat-item h4 {
+      color: #e63946;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-item p {
+      margin: 0;
+      color: #555;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero {
+        height: 60vh;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 45vh;
+        padding: 25px 20px;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+      }
+
+      .search-bar {
+        max-width: 380px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      /* 🔹 Mobile-specific background image */
+      .hero {
+        height: 38vh;
+        padding: 20px 15px;
+        background: linear-gradient(to right, #e5547344, rgba(0, 0, 0, 0.137)),
+          url('./todaynew/Image-2.svg') center/cover no-repeat;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+      }
+
+      .search-bar {
+        max-width: 320px;
+        height: 38px;
+      }
+
+      .search-bar input {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .search-bar button {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .stats-bar {
+        gap: 8px;
+        padding: 8px 10px;
+      }
+
+      .stat-item h4 {
+        font-size: 1rem;
+      }
+
+      .stat-item p {
+        font-size: 0.75rem;
+      }
+    }
+
+    /* ---------------- CARD DESIGN ---------------- */
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      color: #5a2a5a;
+      margin-bottom: 30px;
+      font-size: 1.6rem;
+    }
+
+    .product-card {
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #eee;
+      background-color: #fff;
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .product-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #5a2a5a;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 600;
+      animation: flipBadge 2s infinite;
+    }
+
+    @keyframes flipBadge {
+      0% { transform: rotateY(0deg); }
+      50% { transform: rotateY(180deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .view-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.35);
+      color: #5a2a5a;
+      border: 1px solid rgba(90, 42, 90, 0.3);
+      border-radius: 50%;
+      padding: 5px;
+      font-size: 13px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .product-card:hover .view-btn {
+      opacity: 1;
+    }
+
+    .view-btn:hover {
+      background-color: rgba(255, 255, 255, 0.55);
+      color: #732c73;
+    }
+
+    .product-details {
+      padding: 10px;
+    }
+
+    .product-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .delivery-text {
+      color: green;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .cart-btn {
+      background-color: #5a2a5a;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      position: relative;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .cart-btn:hover {
+      transform: scale(1.1);
+      background-color: #732c73;
+    }
+
+    .rating {
+      color: #ffb400;
+      font-size: 13px;
+    }
+
+    /* ---------------- MODAL ---------------- */
+    .config-modal .modal-dialog {
+      max-width: 600px;
+    }
+
+    .product-config-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .sales-highlight {
+      color: #5a2a5a;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .subtotal {
+      font-weight: 600;
+      font-size: 18px;
+      color: #000;
+    }
+
+    .availability {
+      color: green;
+      font-weight: 600;
+    }
+
+    /* ---------------- SUCCESS MESSAGE ---------------- */
+    .success-message {
+      text-align: center;
+      padding: 30px;
+      animation: fadeInScale 0.6s ease-in-out;
+    }
+
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.85); }
+      60% { opacity: 1; transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-pop {
+      animation: popIcon 0.6s ease-in-out;
+    }
+
+    @keyframes popIcon {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .small-btn {
+      background-color: transparent;
+      border: 1px solid #5a2a5a;
+      color: #5a2a5a;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(90, 42, 90, 0.1);
+    }
+
+    .small-btn:hover {
+      background-color: #5a2a5a;
+      color: #fff;
+      transform: translateY(-2px);
+      border-color: #5a2a5a;
+    }
+
+    /* ---------------- FLOATING CART ICON ---------------- */
+    .floating-cart {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #5a2a5a;
+      color: #fff;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: transform 0.3s;
+    }
+
+    .floating-cart:hover { transform: scale(1.1); }
+
+    .cart-count {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      background-color: #ff4d6d;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      .product-img img { height: 150px; }
+      .floating-cart { width: 45px; height: 45px; font-size: 20px; }
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ank. Flowers</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-line line-1"></span>
+                <span class="toggler-line line-2"></span>
+                <span class="toggler-line line-3"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+  // --- Navbar Auto-Close on Scroll ---
+  let lastScrollY = window.scrollY;
+  const menuCollapse = document.getElementById('navbarNav');
+  let bsCollapseInstance = null;
+
+  window.onscroll = function () {
+      const currentScrollY = window.scrollY;
+      const isMenuOpen = menuCollapse.classList.contains('show');
+
+      if (isMenuOpen && currentScrollY > lastScrollY + 10) {
+          if (!bsCollapseInstance) {
+              bsCollapseInstance = bootstrap.Collapse.getOrCreateInstance(menuCollapse);
+          }
+          bsCollapseInstance.hide();
+      }
+      lastScrollY = currentScrollY;
+  };
+
+  // --- Color Animation for "Ank." ---
+  const ankText = document.getElementById('ank-text');
+  const ankColors = [
+      '#e91e63', '#ff4081', '#f06292', '#f48fb1', '#d81b60',
+      '#c2185b', '#ec407a', '#ad1457', '#f8bbd0', '#f50057'
+  ];
+  let ankIndex = 0;
+  setInterval(() => {
+      ankText.style.color = ankColors[ankIndex];
+      ankIndex = (ankIndex + 1) % ankColors.length;
+  }, 2000);
+</script>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Crafted with <span>Care</span>, Delivered with <span>Love</span></h1>
+    <p>Discover beautiful blooms for every emotion and occasion.</p>
+
+    <div class="search-bar mt-3">
+      <input type="text" placeholder="Search rare & unique flowers...">
+      <button>Buy Now</button>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <h4 class="count" data-target="20000">0</h4>
+      <p>Worldwide Orders</p>
+    </div>
+    <div class="stat-item">
+      <h4 class="count" data-target="7">0</h4>
+      <p>Years Experience</p>
+    </div>
+    <div class="stat-item">
+      <h4 class="count" data-target="2002">0</h4>
+      <p>Happy Customers</p>
+    </div>
+  </div>
+
+  <script>
+    // Animated Counters
+    const counters = document.querySelectorAll('.count');
+
+    const animateCounter = (counter) => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const duration = 2000;
+      const step = target / (duration / 30);
+
+      const updateCount = () => {
+        count += step;
+        if (count < target) {
+          counter.innerText = Math.floor(count);
+          requestAnimationFrame(updateCount);
+        } else {
+          let shortValue;
+          if (target >= 1000) {
+            shortValue = (target / 1000).toFixed(1).replace('.0', '') + 'k+';
+          } else if (target < 10) {
+            shortValue = target + 'yr+';
+          } else {
+            shortValue = target + '+';
+          }
+          counter.innerText = shortValue;
+        }
+      };
+      updateCount();
+    };
+
+    counters.forEach(counter => animateCounter(counter));
+  </script>
+
+
+
+<!-- flower card  -->
+  <div class="container my-5">
+    <h2 class="section-title">Our Beautiful Flowers</h2>
+    <div class="row g-3" id="productRow"></div>
+    <div class="text-center mt-3">
+      <button id="toggleBtn" class="btn btn-outline-dark px-4 py-2 rounded-pill">Show More Flowers</button>
+    </div>
+  </div>
+
+  <!-- Floating Cart Icon -->
+  <div class="floating-cart" id="floatingCart">
+    <i class="bi bi-cart3"></i>
+    <div class="cart-count" id="cartCount">0</div>
+  </div>
+
+  <!-- Config Modal -->
+  <div class="modal fade config-modal" id="cartConfigModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Configure Your Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3" id="configContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Modal -->
+  <div class="modal fade" id="viewModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center p-3">
+          <img id="viewImage" src="" alt="" class="img-fluid rounded mb-3" style="max-height:300px;object-fit:cover;">
+          <h5 id="viewTitle" class="fw-bold"></h5>
+          <p id="viewPrice" class="text-muted mb-1"></p>
+          <button class="btn small-btn rounded-pill px-4 py-2" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const products = [
+      { img: "./new images/flo1.svg", title: "Lovely Roses", price: "$15.99", old: "$19.99", discount: "20%" },
+      { img: "./new images/flo2.svg", title: "Tulip Bouquet", price: "$18.25", old: "$21.00", discount: "15%" },
+      { img: "./new images/flo3.svg", title: "Vase Blossoms", price: "$16.19", old: "$19.25", discount: "10%" },
+      { img: "./new images/flo4.svg", title: "Blossom Basket", price: "$22.00", old: "$25.00", discount: "25%" },
+      { img: "./new images/flo1.svg", title: "Sunshine Mix", price: "$19.50", old: "$23.00", discount: "18%" },
+      { img: "./new images/flo1.svg", title: "Garden Charm", price: "$20.00", old: "$24.00", discount: "12%" },
+    ];
+
+    const row = document.getElementById('productRow');
+    const modal = new bootstrap.Modal(document.getElementById('cartConfigModal'));
+    const configContent = document.getElementById('configContent');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const floatingCart = document.getElementById('floatingCart');
+    const cartCount = document.getElementById('cartCount');
+    const viewModal = new bootstrap.Modal(document.getElementById('viewModal'));
+
+    let showingAll = false;
+    let cart = JSON.parse(localStorage.getItem('flowerCart')) || [];
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+    }
+
+    updateCartCount();
+
+    function renderProducts() {
+      row.innerHTML = '';
+      const visibleProducts = window.innerWidth <= 576 && !showingAll ? products.slice(0, 4) : products;
+      visibleProducts.forEach(product => {
+        const priceNum = parseFloat(product.price.replace('$',''));
+        const col = document.createElement('div');
+        col.className = 'col-6 col-md-4 col-lg-2';
+        col.innerHTML = `
+          <div class="card product-card">
+            <div class="product-img">
+              <img src="${product.img}" alt="${product.title}">
+              <span class="discount-badge">${product.discount}</span>
+              <button class="view-btn" data-img="${product.img}" data-title="${product.title}" data-price="${product.price}">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="product-details">
+              <h5 class="product-title">${product.title}</h5>
+              <div class="d-flex align-items-center">
+                <span class="price">${product.price}</span>
+                <span class="old-price">${product.old}</span>
+              </div>
+              <p class="mb-1">Earliest Delivery: <span class="delivery-text">Today</span></p>
+              <div class="d-flex align-items-center justify-content-between">
+                <div><span class="rating">★★★★★</span></div>
+                <button class="cart-btn" data-img="${product.img}" data-title="${product.title}" data-price="${priceNum}">
+                  <i class="bi bi-cart"></i>
+                </button>
+              </div>
+            </div>
+          </div>`;
+        row.appendChild(col);
+      });
+      toggleBtn.textContent = showingAll ? "Show Less Flowers" : "Show More Flowers";
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      showingAll = !showingAll;
+      renderProducts();
+    });
+
+    renderProducts();
+
+    // Config modal logic
+    document.addEventListener('click', (e) => {
+      const cartBtn = e.target.closest('.cart-btn');
+      if (cartBtn) {
+        const { title, price, img } = cartBtn.dataset;
+        openConfigModal(title, parseFloat(price), img);
+      }
+
+      const viewBtn = e.target.closest('.view-btn');
+      if (viewBtn) {
+        document.getElementById('viewImage').src = viewBtn.dataset.img;
+        document.getElementById('viewTitle').textContent = viewBtn.dataset.title;
+        document.getElementById('viewPrice').textContent = `Price: ${viewBtn.dataset.price}`;
+        viewModal.show();
+      }
+    });
+
+    function openConfigModal(title, price, img) {
+      configContent.innerHTML = `
+        <div class="col-md-6 text-center">
+          <img src="${img}" alt="${title}" class="product-config-img">
+        </div>
+        <div class="col-md-6">
+          <h5 class="fw-bold">${title}</h5>
+          <p class="sales-highlight">🔥 10 sold in last 10 hours</p>
+          <p>Price: <strong>$${price.toFixed(2)}</strong></p>
+          <div class="mb-3">
+            <label class="form-label">Select Color <span class="text-danger">*</span></label>
+            <select class="form-select" id="colorSelect" required>
+              <option value="">Choose...</option>
+              <option>Red</option>
+              <option>Pink</option>
+              <option>Yellow</option>
+              <option>White</option>
+            </select>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <label class="me-2">Quantity:</label>
+            <button class="btn btn-outline-secondary btn-sm" id="minusBtn">-</button>
+            <input type="number" id="qtyInput" class="form-control mx-2 text-center" value="1" min="1" style="width:70px;">
+            <button class="btn btn-outline-secondary btn-sm" id="plusBtn">+</button>
+          </div>
+          <p class="subtotal">Subtotal: $<span id="subtotal">${price.toFixed(2)}</span></p>
+          <p class="availability">Availability: Many In Stock</p>
+          <button class="btn btn-primary w-100" id="addToCartConfirm">Add to Cart</button>
+        </div>
+      `;
+      modal.show();
+
+      const qtyInput = document.getElementById('qtyInput');
+      const subtotal = document.getElementById('subtotal');
+      const plus = document.getElementById('plusBtn');
+      const minus = document.getElementById('minusBtn');
+
+      const updateSubtotal = () => subtotal.textContent = (price * qtyInput.value).toFixed(2);
+      plus.onclick = () => { qtyInput.value++; updateSubtotal(); };
+      minus.onclick = () => { if(qtyInput.value > 1) qtyInput.value--; updateSubtotal(); };
+
+      document.getElementById('addToCartConfirm').onclick = () => {
+        const color = document.getElementById('colorSelect').value;
+        if (!color) {
+          document.getElementById('colorSelect').classList.add('is-invalid');
+          return;
+        }
+
+        // Add to cart storage
+        const item = { title, price, img, qty: parseInt(qtyInput.value), color };
+        cart.push(item);
+        localStorage.setItem('flowerCart', JSON.stringify(cart));
+        updateCartCount();
+
+        configContent.innerHTML = `
+          <div class="success-message">
+            <i class="bi bi-check-circle-fill text-success fs-1 animate-pop"></i>
+            <h5 class="mt-3 fw-semibold text-dark" style="font-size: 1rem;">Added Successfully to Cart!</h5>
+            <p class="text-muted small mb-4">Your beautiful flowers are waiting in the cart 💐</p>
+            <div class="d-flex gap-3 justify-content-center">
+              <button class="btn small-btn rounded-pill px-3 py-2" data-bs-dismiss="modal">
+                Continue Shopping
+              </button>
+              <button class="btn small-btn rounded-pill px-3 py-2" onclick="window.location.href='cart.html'">
+                Move to Cart
+              </button>
+            </div>
+          </div>`;
+      };
+    }
+
+    floatingCart.addEventListener('click', () => {
+      window.location.href = 'cart.html';
+    });
+  </script>
+
+<!-- end floewer card  -->
+
+</body>
+</html>
