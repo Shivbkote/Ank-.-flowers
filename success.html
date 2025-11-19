@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #4C8BFF, #3366CC);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .success-box {
+        background: #ffffff;
+        color: #333;
+        width: 90%;
+        max-width: 420px;
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        animation: pop 0.4s ease-out;
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+        color: #1c1c1c;
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+        margin-top: 10px;
+        line-height: 1.6;
+    }
+
+    .order-id, .delivery-charge {
+        margin-top: 10px;
+        background: #eef3ff;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #3457d5;
+    }
+
+    .redirect-msg {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #777;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: red;
+        animation: fall 3s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-100vh) rotate(0deg); }
+        100% { transform: translateY(100vh) rotate(720deg); }
+    }
+</style>
+</head>
+<body>
+
+<div id="confetti-container"></div>
+
+<div class="success-box">
+    <h2>Payment Successful 🎉</h2>
+
+    <p>Your order is confirmed!  
+    We’re preparing your flowers 😊🌸</p>
+
+    <div class="order-id" id="orderIdBox">
+        Order ID: LOADING...
+    </div>
+
+    <div class="delivery-charge" id="deliveryChargeBox">
+        Delivery Charge: $0.00
+    </div>
+
+    <p class="redirect-msg" id="redirectTimer">
+        Redirecting to Track Order in 5s...
+    </p>
+</div>
+
+<script>
+// ----------------------
+// GENERATE ORDER ID
+// ----------------------
+const orderId = "AZ" + Math.floor(100000 + Math.random() * 900000);
+document.getElementById("orderIdBox").innerHTML = "Order ID: " + orderId;
+
+// ----------------------
+// LOAD DELIVERY CHARGE
+// ----------------------
+let deliveryChargeINR = localStorage.getItem("deliveryCharge") || 50;
+
+// convert INR → USD (1 USD = 0.012)
+let deliveryUSD = (deliveryChargeINR * 0.012).toFixed(2);
+
+document.getElementById("deliveryChargeBox").innerHTML =
+    `Delivery Charge: $${deliveryUSD}`;
+
+// ----------------------
+// SAVE ORDER TO LOCALSTORAGE
+// ----------------------
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let order = {
+    id: orderId,
+    items: cart,
+    deliveryChargeUSD: deliveryUSD,
+    date: new Date().toLocaleString()
+};
+
+let orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || [];
+orderHistory.push(order);
+localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
+
+// Clear cart
+localStorage.removeItem("cart");
+
+// ----------------------
+// REDIRECT TIMER
+// ----------------------
+let time = 5;
+let timerEl = document.getElementById("redirectTimer");
+
+let countdown = setInterval(() => {
+    time--;
+    timerEl.innerHTML = `Redirecting to Track Order in ${time}s...`;
+    if (time === 0) {
+        clearInterval(countdown);
+        window.location.href = "track.html";
+    }
+}, 1000);
+
+// ----------------------
+// CONFETTI
+// ----------------------
+function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.getElementById("confetti-container").appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 3000);
+}
+setInterval(createConfetti, 150);
+</script>
+
+</body>
+</html>

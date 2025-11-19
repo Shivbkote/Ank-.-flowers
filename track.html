@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Track Order — Ank. Flowers</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1: #ffecf8;
+    --bg2: #f6f0ff;
+    --accent: #7b1fa2;
+    --accent-2: #d63384;
+    --muted: #6b6b7a;
+  }
+
+  html,body{height:100%;margin:0;font-family:"Poppins",sans-serif;background: linear-gradient(135deg,#fff0fb,#f3efff);-webkit-font-smoothing:antialiased;}
+  .wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+  }
+
+  .card{
+    width:100%;
+    max-width:720px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.95),#ffffff);
+    border-radius:18px;
+    box-shadow:0 20px 45px rgba(99,61,255,0.12);
+    padding:22px;
+    overflow:hidden;
+  }
+
+  .head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .title{
+    font-size:20px;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .meta{
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .top-row{
+    margin-top:12px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .tag{
+    background: linear-gradient(90deg,#fff6fb,#fff);
+    border:1px dashed rgba(214,51,132,0.08);
+    color:var(--accent-2);
+    padding:8px 12px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:13px;
+  }
+
+  /* PROGRESS */
+  .progress-area{
+    margin-top:20px;
+    padding:14px;
+    background:var(--bg2);
+    border-radius:14px;
+  }
+
+  .steps-row{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:18px 8px 6px 8px;
+  }
+
+  /* base line */
+  .line-base{
+    position:absolute;
+    left:6%;
+    right:6%;
+    top:50%;
+    height:6px;
+    background:#f0e8ff;
+    transform:translateY(-50%);
+    border-radius:6px;
+    z-index:1;
+  }
+
+  /* fill that animates */
+  .line-fill{
+    position:absolute;
+    left:6%;
+    top:50%;
+    height:6px;
+    width:0%;
+    transform:translateY(-50%);
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border-radius:6px;
+    z-index:2;
+    transition-property: width;
+    transition-timing-function: linear;
+  }
+
+  .step{
+    z-index:3;
+    width:calc((88% - 32px) / 4); /* not used visually but keeps spacing */
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    min-width:60px;
+  }
+
+  .step .dot{
+    width:28px;height:28px;border-radius:50%;display:inline-block;border:3px solid #ecdfff;background:#fff;box-shadow:0 6px 18px rgba(123,31,162,0.08);transition:all .35s;
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;
+  }
+
+  .step.active .dot{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border-color:transparent;
+    box-shadow:0 6px 22px rgba(123,31,162,0.25), 0 0 28px rgba(214,51,132,0.06);
+    animation:pulse 1.8s infinite;
+  }
+
+  .step.completed .dot{
+    background:#caa6ff;
+    border-color:transparent;
+  }
+
+  @keyframes pulse{
+    0%{ box-shadow:0 6px 22px rgba(123,31,162,0.18); transform:scale(1); }
+    50%{ box-shadow:0 14px 42px rgba(123,31,162,0.25); transform:scale(1.05); }
+    100%{ box-shadow:0 6px 22px rgba(123,31,162,0.18); transform:scale(1); }
+  }
+
+  .step-label{
+    font-size:13px;
+    color:#2f2f44;
+    font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ITEMS */
+  .items{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+  }
+  .flower{
+    background:linear-gradient(180deg,#fff,#fffaf8);
+    border-radius:10px;
+    padding:10px;
+    border:1px solid #fff1fa;
+    box-shadow:0 10px 20px rgba(123,31,162,0.03);
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .flower .emoji{ font-size:20px; }
+  .flower .name{ font-weight:600; color:#4a2ca6; font-size:14px; }
+
+  .cta-row{
+    margin-top:18px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .btn{
+    padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+  }
+  .btn-primary{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 8px 24px rgba(123,31,162,0.14); }
+  .btn-ghost{ background:transparent;border:1px solid rgba(123,31,162,0.12); color:var(--accent); }
+
+  /* small devices */
+  @media (max-width:520px){
+    .steps-row{ padding:18px 6px 6px 6px; }
+    .step-label{ font-size:11px; }
+    .step .dot{ width:22px;height:22px;border-width:2px; }
+    .items{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="trackCard">
+      <div class="head">
+        <div>
+          <div class="title">🌸 Track Your Order</div>
+          <div class="meta" id="metaLine">—</div>
+        </div>
+        <div id="rightMeta" style="text-align:right">
+          <div class="meta">Delivery</div>
+          <div class="tag" id="deliveryTag">$0.00</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="meta" id="orderIdLine"></div>
+      </div>
+
+      <div class="progress-area" aria-hidden="false">
+        <div class="steps-row" id="stepsRow">
+          <div class="line-base"></div>
+          <div class="line-fill" id="lineFill" style="width:0%"></div>
+
+          <!-- Steps inserted by JS to ensure perfect layout -->
+          <!-- placeholders for spacing -->
+        </div>
+      </div>
+
+      <div class="items" id="itemsBox" aria-live="polite"></div>
+
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="window.location.href='index.html'">Continue Shopping</button>
+        <button class="btn btn-ghost" onclick="window.location.href='contact.html'">Contact Support</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Read order history from localStorage
+  const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+
+  const trackCard = document.getElementById('trackCard');
+  const metaLine = document.getElementById('metaLine');
+  const deliveryTag = document.getElementById('deliveryTag');
+  const orderIdLine = document.getElementById('orderIdLine');
+  const itemsBox = document.getElementById('itemsBox');
+  const stepsRow = document.getElementById('stepsRow');
+  const lineFill = document.getElementById('lineFill');
+
+  if(!orderHistory || orderHistory.length === 0){
+    trackCard.innerHTML = `
+      <div style="padding:28px;text-align:center">
+        <h2 style="color:var(--accent); margin:0 0 10px 0">No Orders Found</h2>
+        <p class="meta">You haven't placed an order yet. Start shopping to see the tracking here.</p>
+        <div style="margin-top:18px">
+          <button class="btn btn-primary" onclick="window.location.href='index.html'">Shop Now</button>
+        </div>
+      </div>
+    `;
+  } else {
+    const lastOrder = orderHistory[orderHistory.length - 1];
+
+    // Use deliveryChargeUSD if present; otherwise fallback to deliveryCharge
+    let deliveryUSD = lastOrder.deliveryChargeUSD;
+    if(deliveryUSD == null && lastOrder.deliveryCharge != null){
+      // if it's numeric string maybe already in USD — we'll show as-is; if you want currency conversion add logic here
+      deliveryUSD = Number(lastOrder.deliveryCharge);
+    }
+    if(deliveryUSD == null) deliveryUSD = 0;
+
+    // Display meta and delivery
+    const createdAt = lastOrder.date || lastOrder.createdAt || new Date().toLocaleString();
+    metaLine.textContent = (lastOrder.items && lastOrder.items.length ? `${lastOrder.items.length} item(s)` : 'No items') + ' • ' + createdAt;
+    deliveryTag.textContent = '$' + parseFloat(deliveryUSD).toFixed(2);
+    orderIdLine.innerHTML = `<strong>Order ID:</strong> ${lastOrder.id || '—'}`;
+
+    // Items: show only flower names (look for name, title or item.title)
+    itemsBox.innerHTML = '';
+    (lastOrder.items || []).forEach(it => {
+      const name = it.name || it.title || it.productName || it.itemName || it.titleText || 'Flower';
+      const node = document.createElement('div');
+      node.className = 'flower';
+      node.innerHTML = `<div class="emoji">🌸</div><div class="name">${escapeHtml(name)}</div>`;
+      itemsBox.appendChild(node);
+    });
+
+    // Progress steps labels
+    const steps = [
+      { id: 'step1', label: 'Order Confirmed' },
+      { id: 'step2', label: 'Packed' },
+      { id: 'step3', label: 'Out for Delivery' },
+      { id: 'step4', label: 'Arriving Soon' }
+    ];
+
+    // Build DOM step elements (keeps layout consistent)
+    steps.forEach((s, idx) => {
+      const stepEl = document.createElement('div');
+      stepEl.className = 'step';
+      stepEl.id = s.id;
+      stepEl.innerHTML = `<div class="dot">${idx+1}</div><div class="step-label">${s.label}</div>`;
+      stepsRow.appendChild(stepEl);
+    });
+
+    // Progress logic:
+    // - initial active is step 1
+    // - each next step moves after a duration (in seconds)
+    // - animation of the line-fill will be linear and last equal to step duration so user sees slow forward motion
+    const stepDurations = [0, 30, 30, 30]; // seconds for step1->step2, step2->3, step3->4; index 0 unused
+    const totalSteps = steps.length;
+    let currentStep = 1;
+
+    // helper to set states and move line
+    function setStep(stepIndex, animateDurationSec){
+      // remove classes
+      for(let i=1;i<=totalSteps;i++){
+        const el = document.getElementById('step'+i);
+        if(!el) continue;
+        el.classList.remove('active','completed');
+      }
+      // mark completed ones
+      for(let i=1;i<stepIndex;i++){
+        const el = document.getElementById('step'+i);
+        if(el) el.classList.add('completed');
+      }
+      // active
+      const activeEl = document.getElementById('step'+stepIndex);
+      if(activeEl) activeEl.classList.add('active');
+
+      // compute fill percentage: (stepIndex-1)/(totalSteps-1) * 100
+      const pct = ((stepIndex - 1) / (totalSteps - 1)) * 100;
+      // set transition duration for smooth slow movement
+      const dur = typeof animateDurationSec === 'number' && animateDurationSec >= 0 ? animateDurationSec : 1.5;
+      lineFill.style.transitionDuration = dur + 's';
+      // set width (this triggers the transition)
+      lineFill.style.width = pct + '%';
+    }
+
+    // start with step1 active (no animation)
+    setStep(1, 0.6);
+
+    // chain timers to step through progress; stops after final step
+    // We'll schedule next steps with setTimeout so they move step-by-step (not looping)
+    function scheduleProgress() {
+      let accumulated = 0;
+      for(let i=1;i<totalSteps;i++){
+        const dur = stepDurations[i]; // seconds to move from step i -> i+1
+        accumulated += dur*1000;
+        // schedule transition to step i+1 after accumulated ms
+        ((nextStep, animDurMs)=>{
+          setTimeout(()=>{
+            currentStep = nextStep;
+            // animate duration in seconds (slightly less than step duration to feel smooth)
+            const animSec = Math.max(1.5, animDurMs/1000);
+            setStep(nextStep, animSec);
+          }, accumulated);
+        })(i+1, dur*1000);
+      }
+    }
+
+    // ensure only schedule once per page load
+    scheduleProgress();
+
+  } // end else block
+
+  // small helper
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+</script>
+</body>
+</html>
