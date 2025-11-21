@@ -1,0 +1,1289 @@
+<!-- Flower Shop Homepage with Full-Screen Responsive Home Section -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ank. Flowers | Flower Shop</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+
+      padding-top: 56px;
+      /* Space for fixed-top navbar */
+      background-color: #fcf8f9;
+      /* Soft blush background */
+    }
+
+    /* Navbar Styles */
+
+    .nav-item {
+
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+
+    }
+
+    .navbar-brand {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #e91e63 !important;
+      /* Rose Pink color for logo */
+
+    }
+
+    .nav-link {
+      color: #555 !important;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #e91e63 !important;
+    }
+
+    /* Custom Mobile Toggler & Animation */
+    .navbar-toggler {
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none !important;
+    }
+
+    .toggler-line {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px 0;
+      background-color: #e91e63;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .navbar-toggler:not(.collapsed) .line-1 {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-toggler:not(.collapsed) .line-2 {
+      opacity: 0;
+    }
+
+    .navbar-toggler:not(.collapsed) .line-3 {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* --- Home Section --- */
+    .home-section {
+      height: 100vh;
+      /* Full viewport height */
+      width: 100%;
+      background-position: center center;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      z-index: 1;
+    }
+
+    /* Overlay for readability */
+    .home-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.103);
+      z-index: -1;
+    }
+
+    /* Desktop Background */
+    .home-section {
+      background-image: url('./assets/homebg.svg');
+    }
+
+    /* Tablet Background */
+    @media (max-width: 992px) {
+      .home-section {
+        background-image: url('./assets/tv.svg');
+      }
+    }
+
+    /* Mobile Background */
+    @media (max-width: 576px) {
+      .home-section {
+        background-image: url('./assets/mv.svg');
+      }
+    }
+
+    /* Animated Ank. Text */
+    #ank-text {
+      transition: color 0.5s ease-in-out;
+    }
+
+    .ank-animate {
+  animation: colorChange 3s infinite ease-in-out;
+  font-weight: 600;
+}
+
+@keyframes colorChange {
+  0% { color: #ff4d6d; }   /* pinkish red */
+  33% { color: #ff9e00; }  /* warm orange */
+  66% { color: #845ec2; }  /* lavender */
+  100% { color: #ff4d6d; } /* back to start */
+}
+
+    .home-section h1 {
+      text-shadow: 2px 2px 10px rgb(155, 155, 155);
+      font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font: weight 500px;
+      color: black;
+
+
+    }
+
+    .home-section p {
+      text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+      font-family: "Dancing Script", cursive;
+      font-optical-sizing: auto;
+      font-size: 30px;
+      color: black;
+
+
+    }
+
+    /* Circular Shop Now Button */
+    .shop-btn {
+      background-color: #e91e63;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 60px;
+      padding: 15px 50px;
+      font-size: 1.2rem;
+    }
+
+    .shop-btn:hover {
+      background-color: #d81b60;
+      transform: scale(1.1);
+      text-decoration: none;
+    }
+
+
+
+
+
+    /* feture card sedign */
+    .features-section p {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font: weight 500px;
+
+
+    }
+
+    /* Floating animation for flower icons */
+    .flower-icon {
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    /*  end feture card sedign */
+
+
+
+    /* <!-- get 15% Diaacount  --> */
+
+    /* Base styles (Desktop by default) */
+    .order-section {
+      width: 100%;
+      min-height: 300px;
+      background-image: url('desktop-image.png');
+      /* Desktop background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      font-family: 'Georgia', serif;
+      color: #222;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Base styles (Desktop) */
+    .order-section {
+      width: 100%;
+      height: 100vh;
+      /* Full viewport height */
+      background-image: url('./assets/getofferbg.svg');
+      /* Desktop image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      /* Align content at the bottom */
+      text-align: center;
+
+      font-family: 'Georgia', serif;
+      color: #222;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      padding: 16px 32px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      /* distance from bottom */
+      max-width: 100%;
+    }
+
+    .content h2 {
+      margin: 0;
+      font-weight: 400;
+      font-size: 3rem;
+      line-height: 1.3;
+    }
+
+    .btn {
+      background-color: #222;
+      border: none;
+      color: #fff;
+      padding: 12px 36px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+
+    /* Tablet view */
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .order-section {
+        background-image: url('./assets/offerTablate\ view.svg');
+        /* Tablet image */
+        height: 80vh;
+      }
+
+      .content h2 {
+        font-size: 1.7rem;
+      }
+
+      .btn {
+        padding: 10px 28px;
+        font-size: 0.9rem;
+      }
+
+      .content {
+        margin-bottom: 30px;
+      }
+    }
+
+    /* Mobile view */
+    @media (max-width: 767px) {
+      .order-section {
+        background-image: url('./assets/offermobileview.svg');
+        /* Mobile image */
+        height: 70vh;
+      }
+
+      .content {
+        padding: 12px 20px;
+        margin-bottom: 20px;
+      }
+
+      .content h2 {
+        font-size: 1.8rem;
+      }
+
+      .btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+      }
+    }
+
+
+
+    /* <!-- End get 15% siaacount  --> */
+
+
+
+    /* bestsellers start */
+    .bestsellers {
+      text-align: center;
+      font-family: "Georgia", serif;
+      padding: 40px 0;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .bestsellers h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .scroll-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px;
+      scrollbar-width: none;
+      /* hide scrollbar for Firefox */
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      display: none;
+      /* hide scrollbar for Chrome, Safari */
+    }
+
+    .item {
+      flex: 0 0 auto;
+      width: 200px;
+      text-align: center;
+    }
+
+    .item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .item img:hover {
+      transform: scale(1.05);
+    }
+
+    .item h3 {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .item p {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .buy-now {
+      margin-top: 30px;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .buy-now:hover {
+      background-color: #444;
+    }
+
+    /* bestsellers end  */
+
+
+    /* <!-- Who we are start  --> */
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      padding: 60px 0;
+      font-family: "Georgia", serif;
+    }
+
+    .about-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .about-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-image img {
+      width: 420px;
+      height: 350px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.6s ease;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.03);
+    }
+
+    .about-text {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      text-align: left;
+    }
+
+    .about-text h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .about-text p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .about-text a {
+      color: #333;
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 2px solid #333;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .about-text a:hover {
+      color: #777;
+      border-color: #777;
+    }
+
+    /* Reverse layout for second block */
+    .reverse {
+      flex-direction: row-reverse;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+
+      .about-block,
+      .reverse {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+
+    /* <!-- Who we are end --> */
+
+
+
+
+    /* <!-- testimonials --> */
+    .testimonials {
+      text-align: center;
+      font-family: "Georgia", serif;
+      padding: 80px 0;
+      background-color: #fff;
+    }
+
+    .testimonials h2 {
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: #222;
+    }
+
+    /* Layout container */
+    .testimonial-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .slider-container {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+    }
+
+    .testimonial-slider {
+      display: flex;
+      gap: 30px;
+      scroll-behavior: smooth;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: 12px;
+
+      padding: 25px;
+      width: 300px;
+      flex: 0 0 300px;
+      text-align: center;
+      transition: opacity 0.8s ease-in-out, transform 0.4s ease;
+    }
+
+    .testimonial-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 1px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .testimonial-card h3 {
+      font-size: 1.1rem;
+      margin: 10px 0 5px;
+      color: #222;
+    }
+
+    .stars {
+      color: gold;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .arrow {
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #555;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .arrow:hover {
+      color: #000;
+      transform: scale(1.2);
+    }
+
+    /* 🌿 Mobile View */
+    @media (max-width: 768px) {
+
+      .testimonials {
+        height: 95vh;
+
+      }
+
+      .testimonial-wrapper {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .arrow {
+        display: none;
+      }
+
+      /* Container must have relative height based on tallest card */
+      .slider-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .testimonial-slider {
+        position: relative;
+        display: block;
+      }
+
+      .testimonial-card {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        opacity: 0;
+        z-index: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .testimonial-card.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      /* Fix: ensure height auto-adjusts to visible card */
+      .slider-container::after {
+        content: "";
+        display: block;
+        padding-bottom: 700px;
+        /* ensures enough height for image + text */
+      }
+    }
+
+
+
+    /* <!-- testimonials end  --> */
+
+
+    /* <!-- contact-section start  --> */
+    /* ======================== SECTION ======================== */
+
+    .contact-section {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 60px 20px;
+    }
+
+    /* ======================== VIDEO ======================== */
+
+    .contact-bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom center;
+      /* crop from top */
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    /* ======================== CONTENT ======================== */
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      max-width: 90%;
+    }
+
+    .vertical-line {
+      width: 2px;
+      height: 90px;
+      background: #fff;
+      margin: 0 auto 25px;
+    }
+
+    .contact-inner h2 {
+      font-size: 24px;
+      line-height: 1.3;
+      margin-bottom: 25px;
+    }
+
+    .contact-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #fff;
+      padding: 14px 40px;
+      font-size: 15px;
+      color: #fff;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .contact-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* ======================== RESPONSIVE ======================== */
+
+    @media (max-width: 1024px) {
+      .contact-inner h2 {
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-section {
+        padding: 40px 15px;
+      }
+
+      .vertical-line {
+        height: 70px;
+      }
+
+      .contact-inner h2 {
+        font-size: 24px;
+      }
+
+      .contact-btn {
+        font-size: 14px;
+        padding: 12px 34px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-section {
+        padding: 30px 10px;
+      }
+
+      .vertical-line {
+        height: 60px;
+      }
+
+      .contact-inner h2 {
+        font-size: 22px;
+        /* Bigger for mobile */
+        line-height: 1.35;
+      }
+
+      .contact-btn {
+        font-size: 14px;
+        padding: 14px 36px;
+        /* Bigger button for mobile */
+        border-radius: 36px;
+      }
+    }
+
+    .buy-now {
+      text-decoration: none;
+    }
+
+    /* <!-- contact-section end  --> */
+
+
+    .flower-footer {
+      background: linear-gradient(180deg, #1a1a1a, #000);
+      padding: 60px 20px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Soft floating petals effect (very mild, no animation lag) */
+    .flower-footer::before {
+      content: "🌸";
+      position: absolute;
+      font-size: 60px;
+      opacity: 0.08;
+      top: 20px;
+      left: 10%;
+    }
+
+    .flower-footer::after {
+      content: "🌼";
+      position: absolute;
+      font-size: 60px;
+      opacity: 0.08;
+      bottom: 20px;
+      right: 10%;
+    }
+
+    .footer-logo {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .footer-tagline {
+      font-size: 16px;
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    .footer-line {
+      width: 80px;
+      height: 2px;
+      background: #ffb6d4;
+      /* soft pink */
+      margin: 0 auto 28px;
+      border-radius: 10px;
+    }
+
+    .footer-copy {
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      .footer-logo {
+        font-size: 30px;
+      }
+
+      .footer-tagline {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Ank. Flowers</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="toggler-line line-1"></span>
+        <span class="toggler-line line-2"></span>
+        <span class="toggler-line line-3"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">Cart</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <div id="home" class="home-section">
+    <h1 class="display-4 fw-bold mb-3">
+      Welcome to <span id="ank-text">Ank.</span> Flowers
+    </h1>
+    <p class="lead mb-4">Refresh your space <br> with lush greenery and exquisite flower bouquets</p>
+    <a href="shop.html" class="btn shop-btn">Shop Now</a>
+  </div>
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+
+    // --- Navbar Auto-Close on Scroll ---
+    let lastScrollY = window.scrollY;
+    const menuCollapse = document.getElementById('navbarNav');
+    let bsCollapseInstance = null;
+
+    window.onscroll = function () {
+      const currentScrollY = window.scrollY;
+      const isMenuOpen = menuCollapse.classList.contains('show');
+
+      if (isMenuOpen && currentScrollY > lastScrollY + 10) {
+        if (!bsCollapseInstance) {
+          bsCollapseInstance = bootstrap.Collapse.getOrCreateInstance(menuCollapse);
+        }
+        bsCollapseInstance.hide();
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    // --- Color Animation for "Ank." ---
+    const ankText = document.getElementById('ank-text');
+    const ankColors = [
+      '#e91e63', '#ff4081', '#f06292', '#f48fb1', '#d81b60',
+      '#c2185b', '#ec407a', '#ad1457', '#f8bbd0', '#f50057'
+    ];
+    let ankIndex = 0;
+    setInterval(() => {
+      ankText.style.color = ankColors[ankIndex];
+      ankIndex = (ankIndex + 1) % ankColors.length;
+    }, 2000);
+  </script>
+
+  <!-- END  Home Section -->
+
+
+
+  <!-- Features Section -->
+  <!-- Features Section -->
+  <section class="features-section py-5">
+    <div class="container text-center">
+      <p class="mb-4 fs-5 fw-semibold">
+        Flowers are our specialty.<br>
+        We make it reasonable.
+      </p>
+      <div class="row justify-content-center align-items-center text-muted">
+        <div class="col-md-3 mb-4">
+          <img src="./assets/f1.svg" alt="First feature icon" class="mb-3 flower-icon" />
+          <h5 class="text-dark fw-semibold">First feature</h5>
+          <p class="small">Premium-quality flowers🌸sourced directly from trusted growers.</p>
+        </div>
+        <div class="col-md-3 mb-4 ">
+          <img src="./assets/f2.svg" alt="Second feature icon" class="mb-3 flower-icon" />
+          <h5 class="text-dark fw-semibold">Second feature</h5>
+          <p class="small">Expert-crafted bouquets designed🌼to match any mood or occasion.</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <img src="./assets/f3.svg" alt="Third feature icon" class="mb-3 flower-icon" />
+          <h5 class="text-dark fw-semibold">Third feature</h5>
+          <p class="small">Fast, reliable delivery that keeps your flowers fresh💐and vibrant.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- END Features Section -->
+
+  <!-- get 15% siaacount  -->
+  <section class="order-section">
+    <div class="content">
+      <h2>Order now and get a <br>15% delivery discount</h2>
+      <!-- <button class="btn">Buy Now</button> -->
+      <a href="shop.html" class="btn">Buy Now</a>
+    </div>
+  </section>
+
+
+
+
+  <!-- End  get 15% siaacount  -->
+
+
+  <!-- bestsellers start -->
+  <section class="bestsellers">
+    <h2>Our Bestsellers</h2>
+    <div class="scroll-container" id="scrollContainer">
+      <div class="item"><img src="./assets/flower/flower1.svg" alt="Flower 1">
+        <h3>Tootsie</h3>
+        <p>$139</p>
+      </div>
+
+      <div class="item"><img src="./assets/flower/Emily.svg" alt="Flower 2">
+        <h3>Emily</h3>
+        <p>$82</p>
+      </div>
+
+      <div class="item"><img src="./assets/flower/flower1.svg" alt="Flower 4">
+        <h3>Coral Sunset</h3>
+        <p>$67</p>
+      </div>
+      <div class="item"><img
+          src="https://static-assets-prod.fnp.com/images/pr/l/v20250530104222/royal-bloom-arrangement_2.jpg"
+          alt="Flower 5">
+        <h3>Ank.basket</h3>
+        <p>$0</p>
+      </div>
+      <div class="item"><img src="https://static-assets-prod.fnp.com/images/pr/l/v20240408181842/sunflower-dream_1.jpg"
+          alt="Flower 6">
+        <h3>Sunflower Dream</h3>
+        <p>$10</p>
+      </div>
+      <div class="item"><img
+          src="https://static-assets-prod.fnp.com/images/pr/l/v20250923130148/peach-rose-n-white-lily-arrangement_1.jpg"
+          alt="Flower 7">
+        <h3>Peach Rose N White Lily </h3>
+        <p>$28</p>
+      </div>
+      <div class="item"><img src="./assets/flower/Tootsie.svg" alt="Flower 3">
+        <h3>Sun & Sea</h3>
+        <p>$144</p>
+      </div>
+      <div class="item"><img
+          src="https://static-assets-prod.fnp.com/images/pr/l/v20251104180620/royale-crimson-n-peach-floral-ensemble_1.jpg"
+          alt="Flower 8">
+        <h3>Royale Crimson N Peach Floral </h3>
+        <p>$79</p>
+      </div>
+      <div class="item"><img src="https://static-assets-prod.fnp.com/images/pr/l/v20230329173436/pretty-in-pink_6.jpg"
+          alt="Flower 9">
+        <h3>Pretty in Pink</h3>
+        <p>$132</p>
+      </div>
+      <div class="item"><img src="flowere data/wings-of-an-angel-assortment_1.webp" alt="Flower 10">
+        <h3>Wings of an Angel</h3>
+        <p>$100</p>
+      </div>
+    </div>
+    <div>
+      <!-- <button class="buy-now">Buy Now</button> -->
+      <a href="shop.html" class="buy-now">Buy Now</a>
+    </div>
+
+
+  </section>
+
+
+  <script>
+    const scrollContainer = document.getElementById("scrollContainer");
+
+    // Clone the content to make an endless loop
+    scrollContainer.innerHTML += scrollContainer.innerHTML;
+
+    let scrollSpeed = 0.8; // smaller = slower
+    let scrollPos = 0;
+
+    function autoScroll() {
+      scrollPos += scrollSpeed;
+      if (scrollPos >= scrollContainer.scrollWidth / 2) {
+        scrollPos = 0; // reset when halfway (loop effect)
+      }
+      scrollContainer.scrollLeft = scrollPos;
+      requestAnimationFrame(autoScroll);
+    }
+
+    autoScroll();
+  </script>
+
+
+  <!-- bestsellers end -->
+
+
+  <!-- Who we are start  -->
+  <section class="about-section">
+    <div class="about-block fade-in">
+      <div class="about-image">
+        <img src="./new images/whoweareimg.svg" alt="Pink Flower">
+      </div>
+      <div class="about-text">
+        <h2><span id="ank-text">Who we are</span></h2>
+        <p>
+          <span class="ank-animate">Ank. Flowers</span> was born from love — a flower shop dedicated to someone who
+          inspired every color, every bloom, and every beautiful detail we create. What started as a personal expression
+          of love has grown into a place where emotions and flowers come together.
+          <br><br>
+          We believe every bouquet carries a story, every petal holds a feeling, and every arrangement is a small piece
+          of the heart. At <span class="ank-animate">Ank. Flowers</span>, love isn’t just a theme — it’s the reason we
+          exist, and the soul behind everything we share with the world.
+          <br><br>
+          <a href="#">See our promise</a>
+        </p>
+      </div>
+
+
+
+  </section>
+
+
+
+
+
+  <script>
+    const blocks = document.querySelectorAll('.fade-in');
+
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      blocks.forEach(block => {
+        const boxTop = block.getBoundingClientRect().top;
+
+        if (boxTop < triggerBottom) {
+          block.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+
+
+  <!-- Who we are end -->
+
+
+  <!-- testimonials -->
+
+  <section class="testimonials">
+    <h2>What our customers say about us</h2>
+
+    <div class="testimonial-wrapper">
+      <button class="arrow left">←</button>
+
+      <div class="slider-container">
+        <div class="testimonial-slider" id="testimonialSlider">
+          <div class="testimonial-card active">
+            <img src="./assets/flower/customer1.svg" alt="Lucy S.">
+            <h3>Nish.K</h3>
+            <div class="stars">★★★★★</div>
+            <p>The flowers I sent looked exactly like the website picture! I am very happy with the service and will use
+              them again!</p>
+          </div>
+
+          <div class="testimonial-card">
+            <img src="./assets/flower/custome2.svg" alt="Kathleen M.">
+            <h3>Ank.B</h3>
+            <div class="stars">★★★★★</div>
+            <p>Always lovely, always beautiful. The flowers arrived on time and looked even better in real life!</p>
+          </div>
+
+          <div class="testimonial-card">
+            <img src="./assets/flower/customer3.svg" alt="Christine W.">
+            <h3>Saac.V</h3>
+            <div class="stars">★★★★★</div>
+            <p>Ank. Flowers never disappoints — every bouquet feels like it was made just for me..</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="arrow right">→</button>
+    </div>
+  </section>
+
+
+  <script>
+    const slider = document.getElementById("testimonialSlider");
+    const leftArrow = document.querySelector(".arrow.left");
+    const rightArrow = document.querySelector(".arrow.right");
+    const cards = document.querySelectorAll(".testimonial-card");
+    let index = 0;
+
+    // Desktop manual navigation
+    rightArrow.addEventListener("click", () => {
+      slider.scrollBy({ left: 330, behavior: "smooth" });
+    });
+    leftArrow.addEventListener("click", () => {
+      slider.scrollBy({ left: -330, behavior: "smooth" });
+    });
+
+    // Mobile fade animation
+    function showNextCard() {
+      if (window.innerWidth <= 768) {
+        cards[index].classList.remove("active");
+        index = (index + 1) % cards.length;
+        cards[index].classList.add("active");
+      }
+    }
+
+    let fadeInterval;
+    function startFadeAnimation() {
+      clearInterval(fadeInterval);
+      if (window.innerWidth <= 768) {
+        fadeInterval = setInterval(showNextCard, 3000);
+      }
+    }
+
+    window.addEventListener("resize", startFadeAnimation);
+    startFadeAnimation();
+  </script>
+
+
+
+
+
+  <!-- testimonials end  -->
+
+  <!-- contact-section start  -->
+
+
+
+  <!-- ===== Contact Section ===== -->
+  <!-- ===== Contact Section ===== -->
+
+
+  <!-- Background Video -->
+
+  <section class="contact-section" id="contact">
+
+    <video class="contact-bg-video" autoplay muted loop playsinline>
+      <source src="./contact video/contact video.mp4" type="video/mp4">
+    </video>
+
+    <div class="contact-inner">
+
+      <div class="vertical-line"></div>
+
+      <h2>Have a question? Tell us we’re here to turn <br>🌼your words into flowers🌼</h2>
+
+      <a href="contact.html" class="contact-btn">Contact</a>
+    </div>
+
+  </section>
+
+
+
+  </script>
+  <!-- contact-section end -->
+
+
+
+  <!-- contact-section end  -->
+  <footer class="flower-footer">
+    <div class="footer-content">
+      <h2 class="footer-logo">Ank. Flowers</h2>
+
+      <p class="footer-tagline">
+        Blooming beauty crafted with love — because every flower tells a<br> 🌼 story 🌼
+      </p>
+
+      <div class="footer-line"></div>
+
+      <p class="footer-copy">© 2025 Ank. Flowers - 🌸crafted with love, for the ones you love.💖</p>
+    </div>
+  </footer>
+
+
+
+
+
+
+  <script>
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+
+
+
+
+</body>
+
+</html>
